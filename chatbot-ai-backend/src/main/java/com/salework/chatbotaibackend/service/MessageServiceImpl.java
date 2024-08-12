@@ -1,7 +1,7 @@
 package com.salework.chatbotaibackend.service;
 
-import com.salework.chatbotaibackend.Entity.Message;
-import com.salework.chatbotaibackend.Repository.MessageRepository;
+import com.salework.chatbotaibackend.entity.Message;
+import com.salework.chatbotaibackend.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;

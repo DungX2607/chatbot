@@ -1,6 +1,6 @@
 package com.salework.chatbotaibackend.controller;
 
-import com.salework.chatbotaibackend.Entity.Message;
+import com.salework.chatbotaibackend.entity.Message;
 import com.salework.chatbotaibackend.service.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

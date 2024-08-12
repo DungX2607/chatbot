@@ -1,7 +1,6 @@
 package com.salework.chatbotaibackend.service;
 
-import com.salework.chatbotaibackend.Entity.Message;
-import org.springframework.http.ResponseEntity;
+import com.salework.chatbotaibackend.entity.Message;
 
 import java.util.List;
 

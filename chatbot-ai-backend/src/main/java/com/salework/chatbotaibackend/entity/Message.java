@@ -1,4 +1,4 @@
-package com.salework.chatbotaibackend.Entity;
+package com.salework.chatbotaibackend.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
