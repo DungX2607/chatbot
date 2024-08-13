@@ -28,11 +28,11 @@ public class MessageServiceImpl implements MessageService {
         messageRepository.save(newMessage);
 
         // Save to Redis with TTL of 30 seconds
-        redisTemplate.opsForValue().set("userMessage", message, 30, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set("userMessage", message, 16, TimeUnit.SECONDS);
     }
 
     @Override
-    @Scheduled(fixedRate = 30000)
+    @Scheduled(fixedRate = 15000)
     public void sendBotMessage() {
         String userMessage = redisTemplate.opsForValue().get("userMessage");
         if (userMessage != null) {
@@ -43,12 +43,28 @@ public class MessageServiceImpl implements MessageService {
             messageRepository.save(responseMessage);
 
             // Save to Redis with TTL of 30 seconds
-            redisTemplate.opsForValue().set("botMessage", "Bot response to: " + userMessage, 30, TimeUnit.SECONDS);
+            redisTemplate.opsForValue().set("botMessage", "Bot response to: " + userMessage, 16, TimeUnit.SECONDS);
+
+            // Delete when bot message is sent
+            redisTemplate.delete("userMessage");
         }
     }
 
     @Override
     public List<Message> getAllMessages() {
         return messageRepository.findAll();
+    }
+
+    @Override
+    public Message getBotResponse() {
+        String botMessage = redisTemplate.opsForValue().get("botMessage");
+        if (botMessage != null) {
+            Message responseMessage = new Message();
+            responseMessage.setContent(botMessage);
+            responseMessage.setSender("bot");
+            responseMessage.setTimestamp(LocalDateTime.now());
+            return responseMessage;
+        }
+        return null;
     }
 }

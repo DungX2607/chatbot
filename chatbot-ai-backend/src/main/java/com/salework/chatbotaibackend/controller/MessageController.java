@@ -16,7 +16,7 @@ public class MessageController {
     private MessageService messageService;
 
     @PostMapping
-    public ResponseEntity<Void> sendMessage(@RequestBody Map<String, String> request) {
+    public ResponseEntity<Map<String, String>> sendMessage(@RequestBody Map<String, String> request) {
         messageService.saveUserMessage(request.get("message"));
         return ResponseEntity.ok().build();
     }
@@ -24,5 +24,15 @@ public class MessageController {
     @GetMapping
     public List<Message> getAllMessages() {
         return messageService.getAllMessages();
+    }
+
+    @GetMapping("/bot")
+    public ResponseEntity<Message> getBotResponse() {
+        Message botMessage = messageService.getBotResponse();
+        if (botMessage != null) {
+            return ResponseEntity.ok(botMessage);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
 }

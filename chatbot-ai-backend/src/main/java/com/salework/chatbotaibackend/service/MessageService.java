@@ -8,4 +8,6 @@ public interface MessageService {
     void saveUserMessage(String message);
     void sendBotMessage();
     List<Message> getAllMessages();
+
+    Message getBotResponse();
 }
